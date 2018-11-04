@@ -40,6 +40,8 @@ public class WebPushController {
     }
 
     /**
+     * http://localhost:8080/push/sendToAllUser?message=abc
+     *
      * @param message
      * @return
      * @throws UnsupportedEncodingException
@@ -50,6 +52,6 @@ public class WebPushController {
     public GeneralJsonResult<String> sendToAll(@RequestParam String message) throws UnsupportedEncodingException {
         logger.info("推送消息：{}", message);
         myWebSocketHandler.pushAllUser(message);
-        return GeneralJsonResult.newSuccessResult("推送成功");
+        return GeneralJsonResult.newSuccessResult("推送成功：" + message);
     }
 }

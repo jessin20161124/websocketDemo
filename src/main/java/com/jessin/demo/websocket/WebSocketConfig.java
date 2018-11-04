@@ -20,7 +20,7 @@ import javax.annotation.Resource;
 @Configuration
 @EnableWebMvc
 @EnableWebSocket
-public class WebSocketConfig  extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
+public class WebSocketConfig extends WebMvcConfigurerAdapter implements WebSocketConfigurer {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
@@ -32,17 +32,15 @@ public class WebSocketConfig  extends WebMvcConfigurerAdapter implements WebSock
      *
      * @param registry
      */
+    @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry registry) {
-//        registry.addHandler(webSocketHandler, "/socketServer")
-//                .addInterceptors(new MyWebSocketHandlerInterceptor())
-//                .setAllowedOrigins("*");
         registry.addHandler(webSocketHandler, "/socketServer")
                 .addInterceptors(new MyWebSocketHandlerInterceptor())
                 .setAllowedOrigins("*")
-                // 使用sockJS，前端也得使用SockJS库。
+                // 使用SockJS，前端也得使用SockJS库。
                 .withSockJS()
-                // 300ms下行发送一次心跳，默认值是25s执行一次
-                .setHeartbeatTime(1000)
+                // 3s下行发送一次心跳，默认值是25s执行一次
+                .setHeartbeatTime(3000)
                 .setDisconnectDelay(300);
     }
 }

@@ -24,14 +24,14 @@ public class MyWebSocketHandler extends TextWebSocketHandler {
     private Logger logger = LoggerFactory.getLogger(getClass());
 
     public void pushAllUser(String message) {
-            for (Map.Entry<String, WebSocketSession> idSessionEntry : sessionMap.entrySet()) {
-                try {
-                    idSessionEntry.getValue().sendMessage(new TextMessage(message));
-                    logger.info("向会话：{}推送消息：{}", idSessionEntry.getKey(), message);
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
+        for (Map.Entry<String, WebSocketSession> idSessionEntry : sessionMap.entrySet()) {
+            try {
+                idSessionEntry.getValue().sendMessage(new TextMessage(message));
+                logger.info("向会话：{}推送消息：{}", idSessionEntry.getKey(), message);
+            } catch (IOException e) {
+                e.printStackTrace();
             }
+        }
     }
 
     @Override

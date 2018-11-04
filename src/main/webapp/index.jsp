@@ -1,4 +1,3 @@
-<%@ page import="java.net.InetAddress" %>
 <%@ page language="java" contentType="text/html; charset=utf-8"
          pageEncoding="utf-8" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
@@ -7,7 +6,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
     <title>Insert title here</title>
     <%
-        // 需要改为本地IP地址
+        // TODO 需要改为本地IP地址
         String ip = "localhost";
     %>
 </head>
@@ -21,14 +20,13 @@
         // new WebSocket也可以
         // SockJS应该是兜底的，先尝试使用WebSocket，可以使用则使用WebSocket，否则使用http等长轮询。
         websocket = new SockJS("http://<%=ip%>:8080/push/socketServer");
-    }
-    else if ('MozWebSocket' in window) {
+    } else if ('MozWebSocket' in window) {
         websocket = new MozWebSocket("ws://<%=ip%>:8080/socketServer");
-    }
-    else {
+    } else {
         // 直接使用SockJS
-        websocket = new SockJS("http://<%=ip%>:8080/push/sockjs/socketServer");
+        websocket = new SockJS("http://<%=ip%>:8080/push/socketServer");
     }
+
     websocket.onopen = onOpen;
     websocket.onmessage = onMessage;
     websocket.onerror = onError;
@@ -37,7 +35,6 @@
     function onOpen(openEvt) {
         alert("websokcet连接创建成功");
     }
-
     function onMessage(evt) {
         alert("收到服务端数据：" + evt.data);
     }
@@ -51,10 +48,10 @@
     function doSend() {
         if (websocket.readyState == WebSocket.OPEN) {
             var msg = document.getElementById("inputMsg").value;
-            websocket.send(msg);//调用后台handleTextMessage方法
+            websocket.send(msg); // 调用后台handleTextMessage方法
             alert("发送成功!");
         } else {
-            alert("连接失败!连接原来状态：" + websocket.readyState + " ，希望为：" + websocket.OPEN);
+            alert("连接失败!连接原来状态：" + websocket.readyState + "，希望为：" + websocket.OPEN);
         }
     }
 

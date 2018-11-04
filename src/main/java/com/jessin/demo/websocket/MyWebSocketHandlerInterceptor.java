@@ -13,8 +13,9 @@ import java.util.Map;
  * @author zexin.guo
  * @create 2018-06-27 下午8:22
  **/
-public class MyWebSocketHandlerInterceptor extends HttpSessionHandshakeInterceptor{
+public class MyWebSocketHandlerInterceptor extends HttpSessionHandshakeInterceptor {
     private Logger logger = LoggerFactory.getLogger(getClass());
+
     @Override
     public boolean beforeHandshake(ServerHttpRequest request, ServerHttpResponse response,
                                    WebSocketHandler wsHandler, Map<String, Object> attributes) throws Exception {
